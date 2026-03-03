@@ -1,0 +1,16 @@
+# Downloaded dataset (large — ~85 MB, re-downloaded automatically on first run)
+filtered_gene_bc_matrices/
+pbmc3k_filtered_gene_bc_matrices.tar.gz
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Jupyter
+.ipynb_checkpoints/
+__pycache__/
+
+# macOS
+.DS_Store

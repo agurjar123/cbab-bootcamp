@@ -1,6 +1,6 @@
 # Computational Biology at Berkeley (CBAB) — Bootcamp
 
-Welcome to the **CBAB Bootcamp** repository! This repo contains hands-on homework assignments designed to teach foundational computational biology skills using real biological datasets.
+Hands-on homework assignments teaching foundational computational biology skills using real biological datasets.
 
 ---
 
@@ -10,57 +10,87 @@ Welcome to the **CBAB Bootcamp** repository! This repo contains hands-on homewor
 cbab-bootcamp/
 └── homework/
     ├── HW1_scRNAseq_student.ipynb    ← Student version (fill in the blanks)
-    └── HW1_scRNAseq_completed.ipynb  ← Answer key (instructors / self-check)
+    └── HW1_scRNAseq_completed.ipynb  ← Answer key
 ```
+
+---
+
+## 💻 Running the Notebooks
+
+### Option A — VS Code (recommended for local)
+
+1. Install [R ≥ 4.1](https://cran.r-project.org)
+2. Install the **Jupyter** extension in VS Code (`ms-toolsai.jupyter`)
+3. In an R console, register the R kernel with Jupyter:
+   ```r
+   install.packages("IRkernel")
+   IRkernel::installspec()
+   ```
+4. Open `HW1_scRNAseq_student.ipynb` in VS Code
+5. Click **Select Kernel** (top-right) → **Jupyter Kernel** → **R**
+
+### Option B — JupyterLab / Jupyter Notebook (local)
+
+1. Install [R ≥ 4.1](https://cran.r-project.org)
+2. Install Jupyter:
+   ```bash
+   pip install jupyterlab   # or: pip install notebook
+   ```
+3. Register the R kernel:
+   ```r
+   install.packages("IRkernel")
+   IRkernel::installspec()
+   ```
+4. Launch Jupyter and open the notebook:
+   ```bash
+   jupyter lab
+   # navigate to homework/HW1_scRNAseq_student.ipynb
+   ```
+
+### Option C — Google Colab (no local install needed)
+
+1. Go to [colab.research.google.com](https://colab.research.google.com)
+2. **File → Upload notebook** → select `HW1_scRNAseq_student.ipynb`
+3. **Runtime → Change runtime type → R**
+4. Run all cells top to bottom
+
+> **Note:** The dataset (~85 MB) downloads automatically when you first run the notebook. It is excluded from this repo via `.gitignore`.
 
 ---
 
 ## 📓 Homework 1 — Single-Cell RNA-Seq Analysis with Seurat
 
-**Topic:** End-to-end scRNA-seq analysis pipeline using the Seurat R package
-**Dataset:** PBMC 3k — 2,700 Peripheral Blood Mononuclear Cells (10x Genomics)
-**Language:** R (Jupyter kernel: `ir`)
+**Language:** R  |  **Kernel:** `ir` (IRkernel)  |  **Dataset:** PBMC 3k (10x Genomics)
 
 ### What You'll Learn
-- Load raw 10x Genomics count matrices with `Read10X` and `CreateSeuratObject`
-- Apply quality-control filters to remove empty droplets, doublets, and dying cells
+
+- Load raw 10x Genomics count matrices with `Read10X` / `CreateSeuratObject`
+- Apply QC filters to remove empty droplets, doublets, and dying cells
 - Normalize and scale expression data for cross-cell comparability
-- Identify highly variable genes and perform PCA
-- Determine dataset dimensionality with an elbow plot
+- Identify highly variable genes and run PCA
+- Choose dataset dimensionality with an elbow plot
 - Cluster cells with graph-based community detection (Louvain)
 - Visualize clusters in 2D with t-SNE and UMAP
 - Find cluster-specific marker genes with Wilcoxon rank-sum tests
 - Annotate clusters with known immune cell type labels
 
-### How to Use
+### Homework Questions (12 coding + 5 reflection)
 
-| File | Who should use it |
-|------|------------------|
-| `HW1_scRNAseq_student.ipynb` | **Students** — fill in `...` placeholders at each step |
-| `HW1_scRNAseq_completed.ipynb` | **Instructors / answer key** — all blanks filled with explanations |
-
-### Getting Started
-
-1. **Open in Google Colab** (recommended — no local R install needed):
-   - Go to [colab.research.google.com](https://colab.research.google.com)
-   - File → Upload notebook → select `HW1_scRNAseq_student.ipynb`
-   - Make sure the runtime is set to **R** (Runtime → Change runtime type → R)
-
-2. **Run locally** (requires R ≥ 4.1 and the `ir` Jupyter kernel):
-   ```bash
-   pip install jupyter
-   R -e "install.packages('IRkernel'); IRkernel::installspec()"
-   jupyter notebook homework/HW1_scRNAseq_student.ipynb
-   ```
-
-3. Run cells **top to bottom** — later cells depend on earlier ones.
-   The dataset (~85 MB) will download automatically on first run.
-
----
-
-## 🧬 About CBAB
-
-[Computational Biology at Berkeley (CBAB)](https://callink.berkeley.edu) is a student-run organization at UC Berkeley that teaches computational approaches to biological research through workshops, bootcamps, and research projects.
+| # | Topic | What to fill in |
+|---|-------|-----------------|
+| Q1 | Load data | `min.cells`, `min.features` in `CreateSeuratObject` |
+| Q2 | QC metrics | `"^MT-"` pattern for `PercentageFeatureSet` |
+| Q3 | QC filtering | Thresholds in `subset()` |
+| Q4 | Normalization | Call `NormalizeData()` |
+| Q5 | Variable features | `selection.method`, `nfeatures` in `FindVariableFeatures` |
+| Q6 | Scaling | `features` argument in `ScaleData` |
+| Q7 | PCA | `features` argument in `RunPCA` |
+| Q8 | Dimensionality | Write `ElbowPlot()` + justify number of PCs |
+| Q9 | Clustering | `dims` and `resolution` parameters |
+| Q10 | Visualization | `dims` for `RunTSNE` and `RunUMAP` |
+| Q11 | Marker finding | `FindMarkers` for cluster 3 |
+| Q12 | Annotation | Fill in 9 cell type names |
+| Q13–17 | Reflection | Written conceptual questions |
 
 ---
 
@@ -68,8 +98,8 @@ cbab-bootcamp/
 
 - Hao et al. (2021). *Integrated analysis of multimodal single-cell data.* Cell. [DOI: 10.1016/j.cell.2021.04.048](https://doi.org/10.1016/j.cell.2021.04.048)
 - [Seurat PBMC3k Tutorial](https://satijalab.org/seurat/articles/pbmc3k_tutorial)
-- 10x Genomics PBMC 3k dataset: [link](https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz)
+- [10x Genomics PBMC 3k dataset](https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz)
 
 ---
 
-*Tutorial originally adapted by Lila Wijaya · Homework version by CBAB Bootcamp team*
+*Tutorial originally adapted by Lila Wijaya · Homework version by CBAB Bootcamp*
