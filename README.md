@@ -17,44 +17,24 @@ cbab-bootcamp/
 
 ## 💻 Running the Notebooks
 
-### Option A — VS Code (recommended for local)
-
-1. Install [R ≥ 4.1](https://cran.r-project.org)
-2. Install the **Jupyter** extension in VS Code (`ms-toolsai.jupyter`)
-3. In an R console, register the R kernel with Jupyter:
-   ```r
-   install.packages("IRkernel")
-   IRkernel::installspec()
-   ```
-4. Open `HW1_scRNAseq_student.ipynb` in VS Code
-5. Click **Select Kernel** (top-right) → **Jupyter Kernel** → **R**
-
-### Option B — JupyterLab / Jupyter Notebook (local)
-
-1. Install [R ≥ 4.1](https://cran.r-project.org)
-2. Install Jupyter:
-   ```bash
-   pip install jupyterlab   # or: pip install notebook
-   ```
-3. Register the R kernel:
-   ```r
-   install.packages("IRkernel")
-   IRkernel::installspec()
-   ```
-4. Launch Jupyter and open the notebook:
-   ```bash
-   jupyter lab
-   # navigate to homework/HW1_scRNAseq_student.ipynb
-   ```
-
-### Option C — Google Colab (no local install needed)
+### Google Colab — no installation needed
 
 1. Go to [colab.research.google.com](https://colab.research.google.com)
 2. **File → Upload notebook** → select `HW1_scRNAseq_student.ipynb`
 3. **Runtime → Change runtime type → R**
 4. Run all cells top to bottom
 
-> **Note:** The dataset (~85 MB) downloads automatically when you first run the notebook. It is excluded from this repo via `.gitignore`.
+### Locally (VS Code or JupyterLab)
+
+See **[LOCAL_SETUP.md](LOCAL_SETUP.md)** for step-by-step instructions for Mac and Windows.
+
+The short version:
+1. Install [R](https://cran.r-project.org)
+2. `pip install jupyterlab`
+3. In an R console: `install.packages("IRkernel"); IRkernel::installspec()`
+4. `jupyter lab` and open the notebook — or open it directly in VS Code with the Jupyter extension
+
+> The dataset (~85 MB) downloads automatically on first run and is excluded from this repo via `.gitignore`.
 
 ---
 
