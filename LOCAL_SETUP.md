@@ -187,3 +187,13 @@ Re-run `IRkernel::installspec()` in R, then restart VS Code or JupyterLab comple
 
 **Package installation fails with compilation errors (Windows):**
 Install **Rtools** from **https://cran.r-project.org/bin/windows/Rtools/**, then retry.
+
+**"This version of R is not set up to install source packages" (Linux):**
+Your R was installed via a system package manager (e.g. `dnf`, `yum`) and is missing the development headers needed to compile packages. The notebook's setup cell handles this automatically by using pre-built binaries — but you need the latest version of the notebook. Re-download it from GitHub and try again. If the error persists, install the R development headers manually:
+```
+# Fedora / RHEL / Rocky / AlmaLinux
+sudo dnf install R-devel
+
+# Ubuntu / Debian
+sudo apt install r-base-dev
+```
